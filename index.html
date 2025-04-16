@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Watch to Earn</title> 
+  <style>  
+    * { margin: 0; padding: 0; box-sizing: border-box; }  
+    body {  
+      font-family: 'Segoe UI', sans-serif;  
+      background: linear-gradient(to right, #141e30, #243b55);  
+      color: #ffffff;  
+      overflow-x: hidden;  
+      transition: all 0.5s ease;  
+    }  
+    .welcome-screen {  
+      height: 100vh;  
+      background: linear-gradient(to right, #1c92d2, #f2fcfe);  
+      color: #000;  
+      display: flex;  
+      flex-direction: column;  
+      align-items: center;  
+      justify-content: center;  
+      animation: fadeIn 1.5s ease-in-out;  
+      transition: opacity 1s ease;  
+    }  
+    .welcome-screen h1 {  
+      font-size: 3rem;  
+      animation: float 3s ease-in-out infinite;  
+      color: #1c1c1c;  
+    }  
+    .welcome-screen p {  
+      font-size: 1.2rem;  
+      margin-top: 1rem;  
+    }  
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }  
+    @keyframes float {  
+      0%, 100% { transform: translateY(0); }  
+      50% { transform: translateY(-10px); }  
+    }  
+    .sidebar {  
+      width: 200px;  
+      background: #111;  
+      padding: 2rem 1rem;  
+      position: fixed;  
+      left: -220px;  
+      top: 0;  
+      height: 100%;  
+      transition: 0.4s;  
+      z-index: 10;  
+    }  
+    .sidebar.active { left: 0; }  
+    .sidebar h2 {  
+      color: #0ff;  
+      margin-bottom: 1.5rem;  
+      text-align: center;  
+    }  
+    .sidebar ul li {  
+      list-style: none;  
+      padding: 10px 0;  
+      border-bottom: 1px solid #444;  
+      color: #ccc;  
+      cursor: pointer;  
+      transition: 0.3s;  
+    }  
+    .sidebar ul li:hover { color: #0ff; }  
+    .menu-toggle {  
+      position: absolute;  
+      left: 10px;  
+      top: 10px;  
+      background: transparent;  
+      border: none;  
+      z-index: 20;  
+      cursor: pointer;  
+    }  
+    .menu-toggle div {  
+      width: 20px;  
+      height: 2px;  
+      background: #00e0ff;  
+      margin: 4px 0;  
+      transition: all 0.3s ease;  
+    }  
+    .main {  
+      margin-left: 0;  
+      padding: 2rem;  
+      transition: margin-left 0.4s ease;  
+    }  
+    .sidebar.active ~ .main {  
+      margin-left: 200px;  
+    }  
+    .logo {  
+      text-align: center;  
+      font-size: 3rem;  
+      font-weight: bold;  
+      color: #00e0ff;  
+      text-shadow: 0 0 15px #00e0ff, 0 0 30px #00e0ff;  
+      margin-bottom: 1.5rem;  
+      animation: fadeIn 1s ease;  
+    }  
+    .button-container, .ad-buttons {  
+      display: flex;  
+      justify-content: center;  
+      flex-wrap: wrap;  
+      gap: 1rem;  
+      margin-top: 2rem;  
+      transition: all 0.4s ease;  
+    }  
+    .btn {  
+      padding: 1rem 2rem;  
+      border: none;  
+      border-radius: 12px;  
+      font-size: 1rem;  
+      color: #fff;  
+      cursor: pointer;  
+      transition: 0.3s;  
+    }  
+    .btn:hover {  
+      transform: scale(1.05);  
+      box-shadow: 0 0 10px #fff;  
+    }  
+    .btn1 { background: #4e54c8; }  
+    .btn2 { background: #00c6ff; }  
+    .btn3 { background: #43cea2; }  
+    .btn4 { background: #ff758c; }  
+    .btn5 { background: #f7971e; }  
+    .btn6 { background: #25D366; }  
+    .ad-buttons {  
+      display: none;  
+      flex-direction: column;  
+      align-items: center;  
+    }  
+    .loader {  
+      border: 6px solid #f3f3f3;  
+      border-top: 6px solid #00e0ff;  
+      border-radius: 50%;  
+      width: 50px;  
+      height: 50px;  
+      margin: 2rem auto;  
+      display: none;  
+      animation: spin 1s linear infinite;  
+    }  
+    @keyframes spin {  
+      0% { transform: rotate(0deg); }  
+      100% { transform: rotate(360deg); }  
+    }
+  </style> 
+ </head> 
+ <body> 
+  <div class="welcome-screen" id="welcomeScreen"> 
+   <h1>Welcome to Watch to Earn</h1> 
+   <p>Your journey to earn money by watching ads starts here!</p> 
+  </div> 
+  <div class="sidebar" id="sidebar"> 
+   <h2>Menu</h2> 
+   <ul> 
+    <li onclick="showAdButtons()">Watch Ads</li> 
+    <li onclick="openWithdraw()">Withdraw</li> 
+   </ul> 
+  </div> <button class="menu-toggle" onclick="toggleSidebar()"> 
+   <div></div> 
+   <div></div> 
+   <div></div> </button> 
+  <div class="main" id="mainApp" style="display:none;"> 
+   <div class="logo">
+     WATCH TO EARN 
+   </div> 
+   <p style="text-align:center;">Welcome to your earning dashboard!</p> 
+   <div class="button-container" id="mainButtons"> <button class="btn btn1" onclick="showAdButtons()">Watch Ads</button> <button class="btn btn5" onclick="openWithdraw()">Withdraw</button> <button class="btn btn3" onclick="openAccountInfo()">Account Info</button> <button class="btn btn6" onclick="openHelpline()">Helpline</button> 
+   </div> 
+   <div class="ad-buttons" id="adButtons"> <button class="btn btn1" onclick="loadAd(1)">Ad 1</button> <button class="btn btn2" onclick="loadAd(2)">Ad 2</button> <button class="btn btn3" onclick="loadAd(3)">Ad 3</button> <button class="btn btn4" onclick="loadAd(4)">Ad 4</button> <button class="btn btn5" onclick="loadAd(5)">Ad 5</button> 
+   </div> 
+   <div class="loader" id="loader"></div> 
+  </div> 
+  <script>  
+    window.onload = () => {  
+      setTimeout(() => {  
+        const welcome = document.getElementById("welcomeScreen");  
+        welcome.style.opacity = "0";  
+        setTimeout(() => {  
+          welcome.style.display = "none";  
+          document.getElementById("mainApp").style.display = "block";  
+        }, 600);  
+      }, 3000);  
+    }  
+
+    function toggleSidebar() {  
+      document.getElementById("sidebar").classList.toggle("active");  
+    }  
+
+    function showAdButtons() {  
+      document.getElementById("adButtons").style.display = "flex";  
+      document.getElementById("mainButtons").style.display = "none";  
+    }  
+
+    function loadAd(adNumber) {  
+      const loader = document.getElementById("loader");  
+      loader.style.display = "block";  
+      setTimeout(() => {  
+        loader.style.display = "none";  
+        alert("Ad " + adNumber + " finished!");  
+        document.getElementById("adButtons").style.display = "none";  
+        document.getElementById("mainButtons").style.display = "flex";  
+      }, 3000);  
+    }
+
+    function openAccountInfo() {
+      window.open("https://watchearn.github.io/ACCOUNT-INFO-/", "_blank");
+    }
+
+    function openWithdraw() {
+      window.open("https://forms.gle/93LwjJcpQJbZFWFt6", "_blank");
+    }
+
+    function openHelpline() {
+      alert("WhatsApp Helpline: +92 03286120453");
+    }
+  </script> 
+ </body>
+</html>
