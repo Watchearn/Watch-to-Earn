@@ -8,8 +8,8 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }  
     body {  
       font-family: 'Segoe UI', sans-serif;  
-      background: linear-gradient(to right, #141e30, #243b55);  
-      color: #ffffff;  
+      background: linear-gradient(to right, #87ceeb, #b0e0e6); /* Sky blue background */  
+      color: #000000;  
       overflow-x: hidden;  
       transition: all 0.5s ease;  
     }  
@@ -92,8 +92,8 @@
       text-align: center;  
       font-size: 3rem;  
       font-weight: bold;  
-      color: #00e0ff;  
-      text-shadow: 0 0 15px #00e0ff, 0 0 30px #00e0ff;  
+      color: #000;  
+      text-shadow: 0 0 10px #fff;  
       margin-bottom: 1.5rem;  
       animation: fadeIn 1s ease;  
     }  
@@ -116,14 +116,14 @@
     }  
     .btn:hover {  
       transform: scale(1.05);  
-      box-shadow: 0 0 10px #fff;  
+      box-shadow: 0 0 10px #000;  
     }  
-    .btn1 { background: #4e54c8; }  
-    .btn2 { background: #00c6ff; }  
-    .btn3 { background: #43cea2; }  
-    .btn4 { background: #ff758c; }  
-    .btn5 { background: #f7971e; }  
-    .btn6 { background: #25D366; }  
+    .btn1 { background: linear-gradient(to right, #ff6a00, #ee0979); }  
+    .btn2 { background: linear-gradient(to right, #00b09b, #96c93d); }  
+    .btn3 { background: linear-gradient(to right, #f857a6, #ff5858); }  
+    .btn4 { background: linear-gradient(to right, #fc4a1a, #f7b733); }  
+    .btn5 { background: linear-gradient(to right, #3a1c71, #d76d77, #ffaf7b); }  
+    .btn6 { background: linear-gradient(to right, #56ab2f, #a8e063); }  
     .ad-buttons {  
       display: none;  
       flex-direction: column;  
@@ -156,18 +156,27 @@
     <li onclick="showAdButtons()">Watch Ads</li> 
     <li onclick="openWithdraw()">Withdraw</li> 
    </ul> 
-  </div> <button class="menu-toggle" onclick="toggleSidebar()"> 
+  </div> 
+  <button class="menu-toggle" onclick="toggleSidebar()"> 
    <div></div> 
    <div></div> 
-   <div></div> </button> 
+   <div></div> 
+  </button> 
   <div class="main" id="mainApp" style="display:none;"> 
-   <div class="logo">
-     WATCH TO EARN 
-   </div> 
+   <div class="logo">WATCH TO EARN</div> 
    <p style="text-align:center;">Welcome to your earning dashboard!</p> 
-   <div class="button-container" id="mainButtons"> <button class="btn btn1" onclick="showAdButtons()">Watch Ads</button> <button class="btn btn5" onclick="openWithdraw()">Withdraw</button> <button class="btn btn3" onclick="openAccountInfo()">Account Info</button> <button class="btn btn6" onclick="openHelpline()">Helpline</button> 
+   <div class="button-container" id="mainButtons"> 
+    <button class="btn btn1" onclick="showAdButtons()">Watch Ads</button> 
+    <button class="btn btn5" onclick="openWithdraw()">Withdraw</button> 
+    <button class="btn btn3" onclick="openAccountInfo()">Account Info</button> 
+    <button class="btn btn6" onclick="openHelpline()">Helpline</button> 
    </div> 
-   <div class="ad-buttons" id="adButtons"> <button class="btn btn1" onclick="loadAd(1)">Ad 1</button> <button class="btn btn2" onclick="loadAd(2)">Ad 2</button> <button class="btn btn3" onclick="loadAd(3)">Ad 3</button> <button class="btn btn4" onclick="loadAd(4)">Ad 4</button> <button class="btn btn5" onclick="loadAd(5)">Ad 5</button> 
+   <div class="ad-buttons" id="adButtons"> 
+    <button class="btn btn1" onclick="openAd('https://watchearn.github.io/Ad-1-watch-to-Earn-/')">Ad 1</button> 
+    <button class="btn btn2" onclick="openAd('https://watchearn.github.io/Ad-2-watch-to-Earn/')">Ad 2</button> 
+    <button class="btn btn3" onclick="openAd('https://watchearn.github.io/Ad-3-Watch-to-Earn/')">Ad 3</button> 
+    <button class="btn btn4" onclick="openAd('https://watchearn.github.io/Ad-4-Watch-to-Earn/')">Ad 4</button> 
+    <button class="btn btn5" onclick="openAd('https://watchearn.github.io/Ad-5-Watch-to-Earn/')">Ad 5</button> 
    </div> 
    <div class="loader" id="loader"></div> 
   </div> 
@@ -192,15 +201,10 @@
       document.getElementById("mainButtons").style.display = "none";  
     }  
 
-    function loadAd(adNumber) {  
-      const loader = document.getElementById("loader");  
-      loader.style.display = "block";  
-      setTimeout(() => {  
-        loader.style.display = "none";  
-        alert("Ad " + adNumber + " finished!");  
-        document.getElementById("adButtons").style.display = "none";  
-        document.getElementById("mainButtons").style.display = "flex";  
-      }, 3000);  
+    function openAd(url) {  
+      window.open(url, "_blank");  
+      document.getElementById("adButtons").style.display = "none";  
+      document.getElementById("mainButtons").style.display = "flex";  
     }
 
     function openAccountInfo() {
@@ -217,3 +221,4 @@
   </script> 
  </body>
 </html>
+
